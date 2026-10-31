@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -16,10 +16,41 @@
         body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
         @media print {
-            body * { visibility: hidden; }
-            #printableReceipt, #printableReceipt * { visibility: visible; }
-            #printableReceipt { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
+            body {
+                background: #fff !important;
+                visibility: visible !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            #receiptContainer,
+            #printableReceipt,
+            #printableReceipt * {
+                visibility: visible !important;
+            }
+
+            #receiptContainer {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            #printableReceipt {
+                display: block !important;
+                position: static !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 16mm !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
@@ -72,7 +103,7 @@
             </div>
 
             <form id="trainerForm" onsubmit="handleFormSubmit(event)" class="p-6 md:p-8 space-y-8">
-                
+
                 <!-- Personal Info Grid -->
                 <div>
                     <h3 class="text-base font-bold text-blue-900 pb-2 mb-4 border-b border-slate-200 flex items-center gap-2">
@@ -366,12 +397,12 @@
         };
 
         const remainingTitles = [
-            "مهندس تشغيل صرف", "مهندس صيانه كهربائية", "مهندس صيانه ميكانيكية", "مهندس مشروعات", "مهندس تخطيط و تطوير", 
-            "اخصائي GIS", "كيميائى صرف", "اخصائى موارد بشرية وادارية", "اخصائى خدمه عملاء ومشتركين", 
+            "مهندس تشغيل صرف", "مهندس صيانه كهربائية", "مهندس صيانه ميكانيكية", "مهندس مشروعات", "مهندس تخطيط و تطوير",
+            "اخصائي GIS", "كيميائى صرف", "اخصائى موارد بشرية وادارية", "اخصائى خدمه عملاء ومشتركين",
             "أخصائي زراعي", "سكرتير تنفيذي", "أخصائي علاقات عامة وتوعية", "أخصائي امن", "أخصائي سلامة وصحة مهنية",
-            "محاسب مالى", "محاسب تجارى", "مهندس تحلية", "كيميائي تحلية", "اخصائي تحليل بيانات", "فنى تشغيل صرف", "فني مشروعات", 
-            "فني مساحه", "فنى صيانة ميكانيكا", "فنى صيانة كهرباء", "فني حملة", "فنى عدادات", 
-            "فنى سلامة وصحة مهنية", "أمين مخزن", "فني معمل مياه", "فنى معمل صرف", "فنى زراعى", 
+            "محاسب مالى", "محاسب تجارى", "مهندس تحلية", "كيميائي تحلية", "اخصائي تحليل بيانات", "فنى تشغيل صرف", "فني مشروعات",
+            "فني مساحه", "فنى صيانة ميكانيكا", "فنى صيانة كهرباء", "فني حملة", "فنى عدادات",
+            "فنى سلامة وصحة مهنية", "أمين مخزن", "فني معمل مياه", "فنى معمل صرف", "فنى زراعى",
             "سكرتارية", "كاتب ومدخل بيانات", "مراقب امن", "امين خزينة", "قارئ ومحصل"
         ];
 
@@ -538,7 +569,9 @@
             new QRCode(qrContainer, {
                 text: `KHCWW-TRAIN-${data.employeeCode}-${data.nationalId}`,
                 width: 70,
-                height: 70
+                height: 70,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
             });
         }
 
